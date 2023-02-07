@@ -55,10 +55,7 @@ export default class Transmission implements TorrentClient {
 			headers.set(XTransmissionSessionId, this.xTransmissionSessionId);
 		}
 		if (username && password) {
-			const credentials = Buffer.from(`${username}:${password}`).toString(
-				"base64"
-			);
-			headers.set("Authorization", `Basic ${credentials}`);
+			headers.set('Authorization', 'Basic ' + base64.encode(username + ":" + password));
 		}
 
 		const response = await fetch(origin + pathname, {
